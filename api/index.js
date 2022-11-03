@@ -21,6 +21,17 @@ const storage = multer.diskStorage({
     }
 })
  
+
+const options = {
+    ca: fs.readFileSync('/etc/letsencrypt/live/api.taeeun.world/fullchain.pem'),
+    key: fs.readFileSync('/etc/letsencrypt/live/api.taeeun.world/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/api.taeeun.world/cert.pem'),
+  };
+
+  https.createServer(options, app).listen(443, () => {
+    console.log('443번 포트에서 대기중입니다.');
+  });
+
 const upload = multer({ storage })
 app.post('/api/upload', upload.single('file'), function (req, res) {
     const file = req.file;
