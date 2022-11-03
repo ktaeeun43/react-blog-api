@@ -32,13 +32,7 @@ app.use("/api/auth", authRoutes)
 app.use("/api/users", userRoutes)
 app.use("/api/posts", postRoutes)
 app.use(cors());
-app.use(express.static("../client/build"));
 
-// index.html for all page routes    html or routing and naviagtion
-app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
-  });
-//}
 
 app.listen(8800, () => {
     console.log("Connected!")
